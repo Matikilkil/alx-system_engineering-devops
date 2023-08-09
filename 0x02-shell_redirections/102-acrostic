@@ -1,2 +1,2 @@
 #!/bin/bashcut 
-cut -c 1 | paste -s -d ''
+cut -c 1 | paste -s -d ' '
