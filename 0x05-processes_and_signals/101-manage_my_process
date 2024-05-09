@@ -1,25 +1,43 @@
 #!/usr/bin/env bash
-# Manages 'manage_my_process'
+#init script for `manage_my_process` process
 
-if [ "${1}" == "start" ]
-then
-	./manage_my_process &
-	touch /var/run/my_process.pid
-	echo "$!" > /var/run/my_process.pid
-	echo "manage_my_process started"
-elif [ "${1}" == "stop" ]
-then
-	echo "manage_my_process stopped"
-	kill "$(cat /var/run/my_process.pid)"
-	rm /var/run/my_process.pid
-elif [ "${1}" == "restart" ]
-then
-	kill "$(cat /var/run/my_process.pid)"
-	rm /var/run/my_process.pid
-	./manage_my_process &
-	touch /var/run/my_process.pid
-	echo "$!" > /var/run/my_process.pid
-	echo "manage_my_process restarted"
+argument="$1";
+
+function start(){
+    ./manage_my_process;
+    "pgrep -f manage_my_process" >> "/var/run/my_process.pid";
+    echo "manage_my_process started";
+}
+
+function stop(){
+    kill -9 "$(pgrep -f manage_my_process )";
+    rm "/var/run/my_process.pid";
+    echo "manage_my_process stopped";
+}
+
+function restart(){
+    kill -9 "$(pgrep -f manage_my_process)";
+    rm "/var/run/my_process.pid";
+    ./manage_my_process;
+    "pgrep -f manage_my_process" >> "/var/run/my_process.pid";
+    echo "manage_my_process restarted";
+}
+
+function usage(){
+    echo "Usage: manage_my_process {start|stop|restart}";
+}
+
+
+if [ -n "$argument" ]; then
+    if [ "$argument" == "start" ]; then 
+        start;
+    elif [ "$argument" == "stop" ]; then 
+        stop;
+    elif [ "$argument" == "restart" ]; then 
+        restart;
+    else
+        usage;
+    fi
 else
-	echo "Usage: manage_my_process {start|stop|restart}"
+    usage;
 fi
