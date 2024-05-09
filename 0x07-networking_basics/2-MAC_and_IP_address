@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # This script provides information about MAC and IP addresses
 
-echo "What is a MAC address?"
-echo "2. The unique identifier of a network interface"
+echo What is a MAC address?
+echo 2. The unique identifier of a network interface
 
-echo "What is an IP address?"
-echo "1. Is to devices connected to a network what postal address is to houses"
+echo What is an IP address?
+echo 1. Is to devices connected to a network what postal address is to houses
