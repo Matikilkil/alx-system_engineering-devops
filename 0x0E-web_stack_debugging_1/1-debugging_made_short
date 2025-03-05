@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # script to fix nginx server
-
 apt update -y
 apt install -y nginx
-service nginx start
+sed -i "s/listen 8080;/listen 80;/" /etc/nginx/sites-enabled/default
+service nginx restart
