@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Ensures Nginx is installed, running, and listening on port 80
 
 if ! dpkg -l | grep -q nginx; then
     apt update -y
