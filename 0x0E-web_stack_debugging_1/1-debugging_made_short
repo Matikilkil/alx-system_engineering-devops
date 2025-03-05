@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # script to fix nginx server
+
 apt update -y
 apt install -y nginx
 service nginx start
